@@ -49,7 +49,7 @@ const displayItems = () => {
   activateDeleteListeners();
   activateEditListeners();
   activateSaveListeners();
-  activateEditListeners();
+  activateCancelListeners();
 };
 
 // function for the delete icon
@@ -83,6 +83,39 @@ const activateEditListeners = () => {
 
       // allowing user input in the input fields
       inputs[i].disabled = false;
+    });
+  });
+};
+
+// function for the save button
+const activateSaveListeners = () => {
+  const saveBtn = document.querySelectorAll(".saveBtn");
+  const inputs = document.querySelectorAll(".input-controller textarea");
+  saveBtn.forEach((sb, i) => {
+    sb.addEventListener("click", () => {
+      updateItem(inputs[i].value, i);
+    });
+  });
+};
+const updateItem = (text, i) => {
+  // setting the list index to user input
+  itemsArray[i] = text;
+  localStorage.setItem("items", JSON.stringify(itemsArray));
+  location.reload();
+};
+
+// function for the cancel button
+const activateCancelListeners = () => {
+  const cancelBtn = document.querySelectorAll(".cancelBtn");
+  const updateController = document.querySelectorAll(".update-controller");
+  const inputs = document.querySelectorAll(".input-controller textarea");
+  cancelBtn.forEach((cb, i) => {
+    cb.addEventListener("click", () => {
+      // hiding the save and cancel buttons
+      updateController[i].style.display = "none";
+
+      // removing the editing capability of the text area
+      inputs[i].disabled = true;
     });
   });
 };
