@@ -27,8 +27,25 @@ const createItem = (item) => {
 // display items list on screen
 const displayItems = () => {
   let items = "";
-  for (let i = 0; i < itemsArray.length; i++) {}
+  for (let i = 0; i < itemsArray.length; i++) {
+    items += `<div class="item">
+                <div class="input-controller">
+                <!-- disabling the text area until another condition is met (for editing)-->
+                <textarea disabled>${itemsArray[i]}</textarea>
+                <div class="edit-controller">
+                    <i class="fa-solid fa-check deleteBtn"></i>
+                    <i class="fa-solid fa-pen-to-square editBtn"></i>
+                </div>
+                </div>
+                <div class="update-controller">
+                <button class="saveBtn">Save</button>
+                <button class="cancelBtn">Cancel</button>
+                </div>
+            </div>`;
+  }
+  document.querySelector(".to-do-list").innerHTML = items;
 };
+
 // Making a date of the current Day
 const displayDate = () => {
   let date = new Date();
@@ -45,5 +62,6 @@ const displayDate = () => {
 // load the functions whenever the window load up
 window.onload = function () {
   displayDate();
+  displayItems();
 };
 const button = document.getElementById("enter");
