@@ -6,7 +6,7 @@ const itemsArray = localStorage.getItem("items")
 console.log(itemsArray);
 
 // event listener for our button
-document.querySelector("#enter").addEventListener("click", () => {
+document.getElementById("enter").addEventListener("click", () => {
   const item = document.getElementById("item");
 
   // helper function
@@ -30,20 +30,61 @@ const displayItems = () => {
   for (let i = 0; i < itemsArray.length; i++) {
     items += `<div class="item">
                 <div class="input-controller">
-                <!-- disabling the text area until another condition is met (for editing)-->
-                <textarea disabled>${itemsArray[i]}</textarea>
-                <div class="edit-controller">
-                    <i class="fa-solid fa-check deleteBtn"></i>
-                    <i class="fa-solid fa-pen-to-square editBtn"></i>
-                </div>
+                    <!-- disabling the text area until another condition is met (for editing)-->
+                    <textarea disabled>${itemsArray[i]}</textarea>
+                    <div class="edit-controller">
+                        <i class="fa-solid fa-check deleteBtn"></i>
+                        <i class="fa-solid fa-pen-to-square editBtn"></i>
+                    </div>
                 </div>
                 <div class="update-controller">
-                <button class="saveBtn">Save</button>
-                <button class="cancelBtn">Cancel</button>
+                    <button class="saveBtn">Save</button>
+                    <button class="cancelBtn">Cancel</button>
                 </div>
             </div>`;
   }
   document.querySelector(".to-do-list").innerHTML = items;
+
+  // making event listeners for each instance
+  activateDeleteListeners();
+  activateEditListeners();
+  activateSaveListeners();
+  activateEditListeners();
+};
+
+// function for the delete icon
+const activateDeleteListeners = () => {
+  const deleteBtn = document.querySelectorAll(".deleteBtn");
+  deleteBtn.forEach((db, i) => {
+    db.addEventListener("click", () => {
+      deleteItem(i);
+    });
+  });
+};
+const deleteItem = (i) => {
+  itemsArray.splice(i, 1);
+  localStorage.setItem("items", JSON.stringify(itemsArray));
+  location.reload();
+};
+
+// function for the edit icon
+const activateEditListeners = () => {
+  const editBtn = document.querySelectorAll(".editBtn");
+
+  // accessing the save/edit buttons
+  const updateController = document.querySelectorAll(".update-controller");
+
+  // accessing the textarea
+  const inputs = document.querySelectorAll(".input-controller textarea");
+  editBtn.forEach((eb, i) => {
+    eb.addEventListener("click", () => {
+      // displaying the buttons for save/edit
+      updateController[i].style.display = "block";
+
+      // allowing user input in the input fields
+      inputs[i].disabled = false;
+    });
+  });
 };
 
 // Making a date of the current Day
