@@ -15,7 +15,7 @@ document.getElementById("enter").addEventListener("click", () => {
 
 // function to create todo list items
 const createItem = (item) => {
-  itemsArray.push(item.value);
+  itemsArray.unshift(item.value);
 
   // storing items in local memory
   localStorage.setItem("items", JSON.stringify(itemsArray));
@@ -137,5 +137,22 @@ const displayDate = () => {
 window.onload = function () {
   displayDate();
   displayItems();
+
+  // saving name to local storage
+  const nameInput = document.querySelector("#name");
+  const username = localStorage.getItem("username") || "";
+
+  nameInput.value = username;
+
+  nameInput.addEventListener("change", (event) => {
+    localStorage.setItem("username", event.target.value);
+
+    // addElement(nameInput);
+  });
 };
 const button = document.getElementById("enter");
+
+// function to add name element to html
+const addElement = (aName) => {
+  // create a
+};

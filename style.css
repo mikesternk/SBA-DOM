@@ -1,7 +1,7 @@
 :root {
-  --light: #fff;
+  --light: #eee;
   --dark: #313154;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
 }
 * {
   margin: 0;
@@ -56,6 +56,21 @@ h3 {
   font-weight: 700;
 }
 
+.to-do-input #item {
+  display: block;
+  width: 100%;
+  font-size: 1rem;
+  padding: 1rem;
+  color: var(--dark);
+  background-color: #fff;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  box-shadow: var(--shadow);
+}
 .update-controller {
   display: none;
+}
+
+main {
+  border: 5px solid black;
 }
