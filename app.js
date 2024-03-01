@@ -15,7 +15,7 @@ document.getElementById("enter").addEventListener("click", () => {
 
 // function to create todo list items
 const createItem = (item) => {
-  itemsArray.unshift(item.value);
+  itemsArray.push(item.value);
 
   // storing items in local memory
   localStorage.setItem("items", JSON.stringify(itemsArray));
